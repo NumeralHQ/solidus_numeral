@@ -1,0 +1,55 @@
+<% admin_layout "full-width" if respond_to?(:admin_layout) %>
+
+<% content_for :page_title do %>
+  <%= link_to @user.email, spree.edit_admin_user_url(@user) %> &mdash; Numeral
+<% end %>
+
+<fieldset data-hook="admin_user_numeral_information">
+  <legend>Numeral tax settings</legend>
+
+  <%= form_for [:admin, @user], as: :user,
+        url: spree.numeral_information_admin_user_url(@user),
+        method: :put do |f| %>
+    <div class="row">
+      <div class="col-6">
+        <div class="field">
+          <label>Numeral customer reference</label>
+          <input type="text" class="fullwidth" value="<%= @user.id %>" readonly>
+          <p class="help-block">
+            <% if @user.numeral_customer_synced_at.present? %>
+              Synced to Numeral at <%= @user.numeral_customer_synced_at %>
+              (<%= @user.numeral_customer_id %>).
+            <% else %>
+              Not yet synced to Numeral. Saving with the exemption enabled
+              creates the customer record.
+            <% end %>
+          </p>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="field checkbox">
+          <label>
+            <%= f.check_box :numeral_tax_exempt %>
+            Tax exempt
+          </label>
+          <p class="help-block">
+            When enabled, this customer is synced to Numeral as globally tax
+            exempt and their orders calculate zero tax.
+          </p>
+        </div>
+        <div class="field">
+          <%= f.label :numeral_vat_id, "VAT identification number" %>
+          <%= f.text_field :numeral_vat_id, class: "fullwidth" %>
+          <p class="help-block">
+            When present, calculations send this customer as a BUSINESS with
+            the VAT id (EU B2B reverse charge).
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-buttons" data-hook="buttons">
+      <%= f.submit "Update", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</fieldset>

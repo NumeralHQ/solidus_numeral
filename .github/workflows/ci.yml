@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  specs:
+    name: Ruby ${{ matrix.ruby }} / Solidus ${{ matrix.solidus }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby: ["3.2", "3.3"]
+        solidus: ["v4.6", "v4.7"]
+    env:
+      SOLIDUS_BRANCH: ${{ matrix.solidus }}
+      DB: sqlite
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+      - name: Run extension specs
+        run: bundle exec rake

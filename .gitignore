@@ -1,0 +1,10 @@
+*.gem
+.bundle/
+Gemfile.lock
+Gemfile-local
+pkg/
+spec/dummy/
+spec/examples.txt
+tmp/
+log/
+.byebug_history

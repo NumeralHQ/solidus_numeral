@@ -12,6 +12,11 @@ end
 
 gem "rails"
 
+# Solidus v4.6 resolves Rails 8.0, whose ActiveSupport JSON encoder still passes
+# `quirks_mode:` to JSON.generate; json >= 3.0 rejects the keyword. Rails 8.1
+# dropped the argument, so only the v4.6 leg needs the pin.
+gem "json", "< 3" if branch == "v4.6"
+
 # Provides basic authentication functionality for testing parts of the engine.
 gem "solidus_auth_devise"
 

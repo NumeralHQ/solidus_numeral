@@ -12,7 +12,11 @@ Official [Numeral](https://www.numeralhq.com) tax extension for
   short-ships are reported as refunds automatically.
 - **Customer exemptions** managed per-user from the Solidus admin.
 
-Requires Solidus >= 4.6, Rails >= 7.2, Ruby >= 3.2.
+Requires Solidus >= 4.6, Rails >= 7.2, Ruby >= 3.2. The extension targets
+[Solidus](https://solidus.io/) specifically: it plugs into
+`Spree::Config.tax_calculator_class` and subscribes to `Spree::Bus`, neither
+of which exists in [Spree](https://spreecommerce.org/), so it does not run on
+Spree stores.
 
 ## Installation
 
@@ -20,8 +24,10 @@ Add the gem:
 
 ```ruby
 # Gemfile
-gem "solidus_numeral"
+gem "solidus_numeral", github: "NumeralHQ/solidus_numeral"
 ```
+
+Once the gem is published to rubygems.org, `gem "solidus_numeral"` works too.
 
 Then install:
 

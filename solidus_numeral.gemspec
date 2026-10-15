@@ -19,7 +19,9 @@ Gem::Specification.new do |spec|
   spec.license = "MIT"
 
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["documentation_uri"] = "https://developer.numeralhq.com"
+  spec.metadata["documentation_uri"] = "https://docs.numeral.com/integrations/solidus"
+  spec.metadata["source_code_uri"] = "https://github.com/NumeralHQ/solidus_numeral"
+  spec.metadata["bug_tracker_uri"] = "https://github.com/NumeralHQ/solidus_numeral/issues"
   spec.metadata["rubygems_mfa_required"] = "true"
 
   spec.required_ruby_version = ">= 3.2"
